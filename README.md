@@ -33,6 +33,7 @@ Technology
 - Python
 - Machine Learning with scikit-learn
 - pandas and NumPy
+- Django
   
 Important Note
 DigiCare is an educational project and is not a medical diagnostic
