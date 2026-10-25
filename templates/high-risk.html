@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High Risk Result — DigiCare</title>
+  <meta name="description" content="DigiCare assessment indicates elevated cardiovascular risk. Review key health indicators and consult a healthcare professional." />
+  <link rel="icon" type="image/svg+xml" href='{% static "favicon.svg" %}' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href='{% static "style.css" %}' />
+</head>
+<body class="result-body">
+
+  <!-- ============================================================
+       HIGH RISK RESULT CARD (CENTER ALIGNED, SLIM METRIC ROWS)
+       ============================================================ -->
+  <main class="result-card theme-high-risk" role="main" aria-labelledby="result-title">
+
+    <!-- Top Circular Warning Icon -->
+    <div class="result-icon-ring" aria-hidden="true">
+      <i class="fa-solid fa-heart-pulse"></i>
+    </div>
+
+    <!-- Status Label & Heading -->
+    <div class="result-badge" role="status">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Risk Assessment Result
+    </div>
+    <h1 class="result-heading" id="result-title">High Risk</h1>
+
+    <!-- Slim Metric Rows with Icon, Title, Numeric Value, and 2-3 Word Suggestions -->
+    <div class="metric-rows-list" role="list" aria-label="Cardiovascular assessment indicators">
+
+      <!-- Row 1 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Medical Advice</span>
+            <span class="mr-suggestion">Consult a cardiologist for further evaluation.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-droplet"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Blood Pressure</span>
+            <span class="mr-suggestion">Monitor your blood pressure regularly.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Heart Health</span>
+            <span class="mr-suggestion">Follow a heart-healthy diet and stay active.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-wave-square"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Sugar Control</span>
+            <span class="mr-suggestion">Monitor your blood sugar levels regularly.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-circle-nodes"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Health Checkup</span>
+            <span class="mr-suggestion">Schedule a medical checkup soon.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href='{% url "home" %}' class="btn-result-home" id="back-home-btn">
+      <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Home
+    </a>
+
+    <!-- Discreet Disclaimer -->
+    <p class="result-disclaimer" role="note">
+      Informational result only. Not a medical diagnosis.
+    </p>
+
+  </main>
+
+</body>
+</html>

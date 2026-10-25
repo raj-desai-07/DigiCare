@@ -1,0 +1,651 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiCare : Heart Disease Risk Assessment</title>
+  <meta name="description" content="DigiCare helps you understand your cardiovascular risk profile through a structured, 11-parameter health assessment. Built for clarity and peace of mind." />
+  <link rel="icon" type="image/svg+xml" href='{% static "favicon.svg" %}' />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href='{% static "style.css" %}' />
+</head>
+<body id="top">
+
+  <!-- ============================================================
+       DYNAMIC AMBIENT BACKGROUND & MESH CANVAS
+       ============================================================ -->
+  <div class="dynamic-bg-container" aria-hidden="true">
+    <canvas id="dynamic-pulse-canvas"></canvas>
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+    <div class="medical-grid-overlay"></div>
+    <div class="mouse-glow-follower" id="mouse-glow"></div>
+  </div>
+
+<!-- ============================================================
+     MAIN CONTENT (NO NAVBAR — Directly begins with Hero)
+     ============================================================ -->
+<main id="main-content">
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hc-hero" id="home" aria-labelledby="hero-heading">
+    <div class="container-xl px-3 px-md-4">
+      <div class="row align-items-center g-4 g-lg-5">
+
+        <!-- Left Column: Copy & Actions -->
+        <div class="col-12 col-lg-6">
+          <div class="hero-eyebrow dc-reveal">
+            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+            Cardiovascular Risk Assessment
+          </div>
+
+          <h1 class="hero-heading dc-reveal delay-1" id="hero-heading">
+            Understand Your<br>
+            <span class="hl">Heart Health</span> Risk
+          </h1>
+
+          <p class="hero-desc dc-reveal delay-2">
+            DigiCare guides you through a structured 11-parameter health assessment
+            to help you understand key cardiovascular indicators empowering you to have
+            more informed and proactive conversations with your healthcare provider.
+          </p>
+
+          <div class="hero-actions dc-reveal delay-3">
+            <a href="#assessment-form" class="btn-brand" id="hero-start-btn">
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+              Start Assessment
+            </a>
+            <a href="#how-it-works" class="btn-text-link">
+              How It Works <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="hero-trust dc-reveal delay-4">
+            <span class="trust-item">
+              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Privacy First
+            </span>
+            <span class="trust-item">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> No Data Stored
+            </span>
+            <span class="trust-item">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i> 11 Clinical Indicators
+            </span>
+          </div>
+        </div>
+
+        <!-- Right Column: Visual Media -->
+        <div class="col-12 col-lg-6">
+          <div class="hero-image-wrap dc-reveal delay-2">
+            <img
+              src='{% static "hero-heart.png" %}'
+              alt="Medical illustration of a human heart with clinical data and pulse monitoring lines for the DigiCare assessment"
+              loading="eager"
+            />
+            <div class="hero-float-chip top dc-reveal delay-3">
+              <span class="chip-ico" aria-hidden="true">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </span>
+              <div>
+                <span>72 BPM</span>
+                <small>Resting Heart Rate</small>
+              </div>
+            </div>
+            <div class="hero-float-chip bottom dc-reveal delay-4">
+              <span class="chip-ico" aria-hidden="true">
+                <i class="fa-solid fa-clipboard-list"></i>
+              </span>
+              <div>
+                <span>11 Parameters</span>
+                <small>Health Indicators</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW DIGICARE WORKS SECTION (Equal-height cards)
+       ============================================================ -->
+  <section class="hc-how-section" id="how-it-works" aria-labelledby="how-heading">
+    <div class="container-xl px-3 px-md-4">
+
+      <div class="text-center mb-4 pb-2 dc-reveal">
+        <p class="section-label mx-auto" style="justify-content:center;">
+          <i class="fa-solid fa-route" aria-hidden="true"></i> Process
+        </p>
+        <h2 class="section-title" id="how-heading">How DigiCare Works</h2>
+        <span class="rule-brand mx-auto" role="presentation"></span>
+        <p class="section-sub mx-auto text-center">
+          A four-step pathway designed to help you organize your cardiovascular indicators clearly and securely.
+        </p>
+      </div>
+
+      <div class="row g-3 g-lg-4 align-items-stretch">
+        <!-- Step 1 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="how-step-card dc-reveal delay-1">
+            <div class="how-step-header">
+              <span class="how-step-num">Step 01</span>
+              <span class="how-step-icon" aria-hidden="true">
+                <i class="fa-solid fa-file-pen"></i>
+              </span>
+            </div>
+            <div class="how-step-body">
+              <h5>Enter Your Data</h5>
+              <p>Complete the nine health indicators across our structured assessment form at your own pace.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="how-step-card dc-reveal delay-2">
+            <div class="how-step-header">
+              <span class="how-step-num">Step 02</span>
+              <span class="how-step-icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-virus"></i>
+              </span>
+            </div>
+            <div class="how-step-body">
+              <h5>Secure Assessment</h5>
+              <p>Your inputs remain completely on your device, private and safe, with zero external tracking.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="how-step-card dc-reveal delay-3">
+            <div class="how-step-header">
+              <span class="how-step-num">Step 03</span>
+              <span class="how-step-icon" aria-hidden="true">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+              </span>
+            </div>
+            <div class="how-step-body">
+              <h5>Review Risk Profile</h5>
+              <p>View a clear, readable risk classification accompanied by practical preventive guidance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="how-step-card dc-reveal delay-4">
+            <div class="how-step-header">
+              <span class="how-step-num">Step 04</span>
+              <span class="how-step-icon" aria-hidden="true">
+                <i class="fa-solid fa-user-doctor"></i>
+              </span>
+            </div>
+            <div class="how-step-body">
+              <h5>Consult a Clinician</h5>
+              <p>Bring your DigiCare indicators to your next doctor appointment for professional clinical advice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HEALTH PROFILE ASSESSMENT FORM
+       (NO NUMBERED 1-4 INDICATORS)
+       ============================================================ -->
+  <section class="hc-form-section" id="assessment-form" aria-labelledby="form-heading">
+    <div class="container-xl px-3 px-md-4">
+
+      <div class="mb-4 pb-2 dc-reveal">
+        <p class="section-label">
+          <i class="fa-solid fa-notes-medical" aria-hidden="true"></i> Health Profile
+        </p>
+        <h2 class="section-title" id="form-heading">Complete Your Health Profile</h2>
+        <span class="rule-brand" role="presentation"></span>
+        <p class="section-sub">
+          Enter the 11 health indicators below. All fields are required to submit your risk assessment. Your information remains strictly private and is never transmitted or stored.
+        </p>
+      </div>
+
+      <form method="POST" action='{% url "home" %}' id="heart-assessment-form" novalidate aria-label="DigiCare Heart Disease Risk Assessment Form">
+        {% csrf_token %}
+        <!-- Error Banner shown if required fields are missing on submit -->
+        <div class="form-alert-banner" id="form-error-banner" role="alert" aria-live="assertive">
+          <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+          <span>Please complete all required fields marked with an asterisk (<strong class="req-star">*</strong>) before submitting your assessment.</span>
+        </div>
+
+        <div class="row g-3 g-md-4">
+
+          <!-- Field 1: Age -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="age">
+              <label class="fc-label" for="age-slider">
+                <i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Age <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Move the slider to select your age (18–100 years).</p>
+              <div class="age-pill-row">
+                <span class="age-pill-label">Selected Age</span>
+                <span class="age-pill" id="age-pill" aria-live="polite" aria-label="Selected age: 45 years">45</span>
+              </div>
+              <input
+                type="range"
+                id="age-slider"
+                name="age"
+                min="18"
+                max="100"
+                value="45"
+                required
+                aria-label="Age slider, minimum 18, maximum 100"
+                aria-valuemin="18"
+                aria-valuemax="100"
+                aria-valuenow="45"
+              />
+              <div class="age-range-ends" aria-hidden="true">
+                <span>18 yrs</span>
+                <span>100 yrs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field 2: Sex -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-2" data-field="sex">
+              <fieldset>
+                <legend class="fc-label">
+                  <i class="fa-solid fa-venus-mars" aria-hidden="true"></i> Sex <span class="req-star" title="Required" aria-hidden="true">*</span>
+                </legend>
+                <p class="fc-helper">Select your biological sex as evaluated for cardiovascular metrics.</p>
+                <div class="seg-ctrl" role="group" aria-label="Biological sex selection">
+                  <input type="radio" name="sex" id="sex-f" value="0" required />
+                  <label for="sex-f">
+                    <i class="fa-solid fa-venus" aria-hidden="true"></i> Female
+                  </label>
+                  <input type="radio" name="sex" id="sex-m" value="1" required />
+                  <label for="sex-m">
+                    <i class="fa-solid fa-mars" aria-hidden="true"></i> Male
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Field 3: Chest Pain Type -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="cp">
+              <label class="fc-label" for="cp-select">
+                <i class="fa-solid fa-heart-crack" aria-hidden="true"></i> Chest Pain Type (cp) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Describe the nature of any chest discomfort experienced.</p>
+              <select class="hc-select" id="cp-select" name="chest_pain_type" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="0">Typical Angina</option>
+                <option value="1">Atypical Angina</option>
+                <option value="2">Non-anginal Pain</option>
+                <option value="3">Asymptomatic</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Field 4: Fasting Blood Sugar -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-2" data-field="fbs">
+              <fieldset>
+                <legend class="fc-label">
+                  <i class="fa-solid fa-droplet" aria-hidden="true"></i> Fasting Blood Sugar (fbs) <span class="req-star" title="Required" aria-hidden="true">*</span>
+                </legend>
+                <p class="fc-helper">Is your fasting blood sugar level greater than 120&nbsp;mg/dL?</p>
+                <div class="seg-ctrl" role="group" aria-label="Fasting blood sugar above 120 mg/dL">
+                  <input type="radio" name="fasting_blood_sugar" id="fbs-no" value="0" required />
+                  <label for="fbs-no">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i> No
+                  </label>
+                  <input type="radio" name="fasting_blood_sugar" id="fbs-yes" value="1" required />
+                  <label for="fbs-yes">
+                    <i class="fa-solid fa-check" aria-hidden="true"></i> Yes
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Field 5: Resting ECG Results -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="restecg">
+              <label class="fc-label" for="restecg-select">
+                <i class="fa-solid fa-wave-square" aria-hidden="true"></i> Resting ECG Results (restecg) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Findings from your resting electrocardiogram.</p>
+              <select class="hc-select" id="restecg-select" name="resting_ecg" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="0">Normal</option>
+                <option value="1">ST-T Wave Abnormality</option>
+                <option value="2">Left Ventricular Hypertrophy</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Field 6: Exercise-Induced Angina -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-2" data-field="exang">
+              <fieldset>
+                <legend class="fc-label">
+                  <i class="fa-solid fa-person-running" aria-hidden="true"></i> Exercise-Induced Angina (exang) <span class="req-star" title="Required" aria-hidden="true">*</span>
+                </legend>
+                <p class="fc-helper">Do you experience chest discomfort or tightness during exertion?</p>
+                <div class="seg-ctrl" role="group" aria-label="Exercise-induced angina">
+                  <input type="radio" name="exercise_angina" id="exang-no" value="0" required />
+                  <label for="exang-no">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i> No
+                  </label>
+                  <input type="radio" name="exercise_angina" id="exang-yes" value="1" required />
+                  <label for="exang-yes">
+                    <i class="fa-solid fa-check" aria-hidden="true"></i> Yes
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- Field 7: ST Segment Slope -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="slope">
+              <label class="fc-label" for="slope-select">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i> ST Segment Slope (slope) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">The slope of the peak exercise ST segment on your ECG.</p>
+              <select class="hc-select" id="slope-select" name="st_slope" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Field 8: Resting Blood Pressure (trestbps) -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-2" data-field="trestbps">
+              <label class="fc-label" for="trestbps-input">
+                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Resting Blood Pressure (trestbps) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Resting blood pressure measured in mmHg upon admission (e.g. 120).</p>
+              <div class="input-with-unit">
+                <input
+                  type="number"
+                  class="hc-input"
+                  id="trestbps-input"
+                  name="resting_bp"
+                  placeholder="e.g. 120"
+                  min="50"
+                  max="250"
+                  step="1"
+                  required
+                  aria-label="Resting Blood Pressure (trestbps) in mmHg"
+                />
+                <span class="input-unit">mmHg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field 9: Cholesterol (chol) -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="chol">
+              <label class="fc-label" for="chol-input">
+                <i class="fa-solid fa-vial" aria-hidden="true"></i> Cholesterol (chol) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Serum cholesterol level measured in mg/dL (e.g. 200).</p>
+              <div class="input-with-unit">
+                <input
+                  type="number"
+                  class="hc-input"
+                  id="chol-input"
+                  name="cholesterol"
+                  placeholder="e.g. 200"
+                  min="80"
+                  max="600"
+                  step="1"
+                  required
+                  aria-label="Serum Cholesterol (chol) in mg/dL"
+                />
+                <span class="input-unit">mg/dL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field 10: Maximum Heart Rate (thalach) -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-2" data-field="thalach">
+              <label class="fc-label" for="thalach-input">
+                <i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Maximum Heart Rate (thalach) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">Maximum heart rate achieved during exercise stress testing (e.g. 150).</p>
+              <div class="input-with-unit">
+                <input
+                  type="number"
+                  class="hc-input"
+                  id="thalach-input"
+                  name="max_heart_rate"
+                  placeholder="e.g. 150"
+                  min="50"
+                  max="250"
+                  step="1"
+                  required
+                  aria-label="Maximum Heart Rate (thalach) in BPM"
+                />
+                <span class="input-unit">BPM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field 11: Oldpeak (oldpeak) -->
+          <div class="col-12 col-md-6">
+            <div class="form-card dc-reveal delay-1" data-field="oldpeak">
+              <label class="fc-label" for="oldpeak-input">
+                <i class="fa-solid fa-chart-area" aria-hidden="true"></i> Oldpeak (oldpeak) <span class="req-star" title="Required" aria-hidden="true">*</span>
+              </label>
+              <p class="fc-helper">ST depression induced by exercise relative to rest (e.g. 1.5).</p>
+              <div class="input-with-unit">
+                <input
+                  type="number"
+                  class="hc-input"
+                  id="oldpeak-input"
+                  name="oldpeak"
+                  placeholder="e.g. 1.5"
+                  min="0"
+                  max="10"
+                  step="0.1"
+                  required
+                  aria-label="Oldpeak ST depression in mm"
+                />
+                <span class="input-unit">mm</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+
+        <!-- Submit Button Area -->
+        <div class="form-submit-area mt-4 dc-reveal delay-2">
+          <button
+            type="submit"
+            class="btn-assess"
+            id="assess-btn"
+            aria-label="Assess heart disease risk based on entered health data"
+          >
+            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+            Assess Heart Disease
+          </button>
+          <p class="form-disclaimer" role="note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            DigiCare is a health awareness and risk education platform. Results are
+            informational and do not substitute for professional medical advice,
+            diagnosis, or treatment. Always consult a qualified physician for any health concerns.
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT DIGICARE SECTION (EXACTLY TWO PARAGRAPHS)
+       ============================================================ -->
+  <section class="hc-about" id="about" aria-labelledby="about-heading">
+    <div class="container-xl px-3 px-md-4">
+      <div class="row align-items-center g-4 g-lg-5">
+
+        <!-- Text Column: EXACTLY TWO PARAGRAPHS -->
+        <div class="col-12 col-lg-6">
+          <div class="about-text dc-reveal">
+            <p class="section-label">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i> About DigiCare
+            </p>
+            <h2 class="section-title" id="about-heading">Heart Health Awareness Starts Here</h2>
+            <span class="rule-brand" role="presentation"></span>
+
+            <p>
+              DigiCare is a structured cardiovascular risk assessment platform designed to help
+              individuals understand the vital health indicators most commonly evaluated during cardiac
+              reviews. By guiding users through 11 clinically recognised parameters from resting ECG
+              patterns and blood sugar levels to blood pressure and cholesterol observations DigiCare consolidates key health
+              factors into an intuitive profile that prepares users for more informed, confident discussions
+              with their clinicians.
+            </p>
+
+            <p>
+              Cardiovascular disease remains one of the world's most significant health concerns, yet
+              many individuals attend clinical appointments without a clear understanding of their
+              personal risk factors. DigiCare bridges this critical gap by translating complex medical
+              metrics into accessible health awareness that complements professional medical care,
+              encouraging proactive lifestyle habits and timely preventive consultations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature Cards Column -->
+        <div class="col-12 col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="about-feature-card dc-reveal delay-1">
+                <div class="afc-icon" aria-hidden="true">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <p class="afc-title">Risk Intelligence</p>
+                <p class="afc-desc">11 clinical indicators drawn from standard cardiovascular assessment protocols.</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="about-feature-card dc-reveal delay-2">
+                <div class="afc-icon" aria-hidden="true">
+                  <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <p class="afc-title">Privacy by Design</p>
+                <p class="afc-desc">All health data stays entirely on your local device. No data is ever transmitted or stored.</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="about-feature-card dc-reveal delay-3">
+                <div class="afc-icon" aria-hidden="true">
+                  <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+                <p class="afc-title">Accessible Anywhere</p>
+                <p class="afc-desc">Fully responsive and optimised for phones, tablets, and desktop computers alike.</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="about-feature-card dc-reveal delay-4">
+                <div class="afc-icon" aria-hidden="true">
+                  <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <p class="afc-title">Consultation Ready</p>
+                <p class="afc-desc">Built to complement, not replace, thorough clinical evaluation by qualified physicians.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     GLOBAL FOOTER
+     ============================================================ -->
+<footer class="dc-footer" role="contentinfo">
+  <div class="container-xl px-3 px-md-4">
+    <div class="footer-brand-row">
+
+      <!-- Brand Column -->
+      <div class="footer-brand-col">
+        <a href='{% url "home" %}' class="footer-dc-brand text-decoration-none">
+          <span class="fb-icon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+          <span class="fb-name">Digi<em>Care</em></span>
+        </a>
+        <p class="footer-tagline">
+          A structured cardiovascular risk assessment platform helping users understand key
+          heart health indicators and prepare for informed medical consultations.
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="footer-links-col">
+        <p class="footer-links-heading">Navigation</p>
+        <ul class="footer-links-list" role="list">
+          <li><a href='{% url "home" %}'><i class="fa-solid fa-house fa-fw" aria-hidden="true"></i> Home</a></li>
+          <li><a href="#about"><i class="fa-solid fa-circle-info fa-fw" aria-hidden="true"></i> About DigiCare</a></li>
+          <li><a href="#how-it-works"><i class="fa-solid fa-route fa-fw" aria-hidden="true"></i> How It Works</a></li>
+          <li><a href="#assessment-form"><i class="fa-solid fa-stethoscope fa-fw" aria-hidden="true"></i> Health Assessment</a></li>
+        </ul>
+      </div>
+
+      <!-- Developer Links -->
+      <div class="footer-links-col">
+        <p class="footer-links-heading">Developer</p>
+        <ul class="footer-links-list" role="list">
+          <li>
+            <a href="https://linkedin.com/in/rajdesai10" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-linkedin fa-fw" aria-hidden="true"></i> LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/raj-desai-07" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github fa-fw" aria-hidden="true"></i> GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; <span id="footer-year"></span> DigiCare. All rights reserved.</p>
+      <p class="footer-disclaimer">
+        <i class="fa-solid fa-triangle-exclamation" style="color:#a87f84;" aria-hidden="true"></i>
+        DigiCare is made for educational purposes only. Always consult a qualified physician.
+      </p>
+    </div>
+
+    <!-- Developer Credit -->
+    <div class="footer-dev-line">
+      <p>Develop by <a href="https://linkedin.com/in/rajdesai10" target="_blank" rel="noopener noreferrer">Raj Desai</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src='{% static "main.js" %}'></script>
+</body>
+</html>

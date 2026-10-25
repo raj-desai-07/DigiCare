@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Low Risk Result — DigiCare</title>
+  <meta name="description" content="DigiCare assessment indicates lower cardiovascular risk factors. Review your baseline parameters and maintain healthy habits." />
+  <link rel="icon" type="image/svg+xml" href='{% static "favicon.svg" %}' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href='{% static "style.css" %}' />
+</head>
+<body class="result-body">
+
+  <!-- ============================================================
+       LOW RISK RESULT CARD (CENTER ALIGNED, SLIM METRIC ROWS)
+       ============================================================ -->
+  <main class="result-card theme-low-risk" role="main" aria-labelledby="result-title">
+
+    <!-- Top Circular Heart-Check Icon -->
+    <div class="result-icon-ring" aria-hidden="true">
+      <i class="fa-solid fa-heart-circle-check"></i>
+    </div>
+
+    <!-- Status Label & Heading -->
+    <div class="result-badge" role="status">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Risk Assessment Result
+    </div>
+    <h1 class="result-heading" id="result-title">Low Risk</h1>
+
+    <!-- Slim Metric Rows with Icon, Title, Numeric Value, and 2-3 Word Suggestions -->
+    <div class="metric-rows-list" role="list" aria-label="Cardiovascular assessment indicators">
+
+      <!-- Row 1 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-heart-circle-check"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Keep It Up</span>
+            <span class="mr-suggestion">Maintain your healthy lifestyle and stay active.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-droplet"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Heart Health</span>
+            <span class="mr-suggestion">Continue following heart-healthy habits.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-gauge"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Healthy Lifestyle</span>
+            <span class="mr-suggestion">Eat balanced meals and exercise regularly.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-wave-square"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Stay Active</span>
+            <span class="mr-suggestion">Aim for regular physical activity every day.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="metric-row" role="listitem">
+        <div class="mr-left">
+          <span class="mr-icon" aria-hidden="true"><i class="fa-solid fa-circle-nodes"></i></span>
+          <div class="mr-info">
+            <span class="mr-title">Routine Checkup</span>
+            <span class="mr-suggestion">Schedule regular checkups to stay informed.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href='{% url "home" %}' class="btn-result-home" id="back-home-btn">
+      <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Home
+    </a>
+
+    <!-- Discreet Disclaimer -->
+    <p class="result-disclaimer" role="note">
+      Informational result only. Not a medical guarantee.
+    </p>
+
+  </main>
+
+</body>
+</html>
