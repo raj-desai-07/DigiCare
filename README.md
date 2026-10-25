@@ -1,4 +1,4 @@
-DigiCare --- Heart Disease Prediction
+#DigiCare : Heart Disease Prediction
 
 DigiCare is a machine learning--based web application designed to
 predict a user's potential heart disease risk from selected health
